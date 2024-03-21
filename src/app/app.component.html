@@ -1,10 +1,21 @@
 <app-top-bar></app-top-bar>
-<div class="slotnum">
-  <app-left [leftnum]="leftnum"></app-left>
-  <app-mid [midnum]="midnum"></app-mid>
-  <app-right [rightnum]="rightnum"></app-right>
+
+<div class="main">
+
+  <div class="slotnum">
+    <app-left [leftnum]="leftnum"></app-left>
+    <app-mid [midnum]="midnum"></app-mid>
+    <app-right [rightnum]="rightnum"></app-right>
+  </div>
+
+  <div id="showbox" class="video" style="display: none">
+    <video autoplay src="../assets/countdown01-b5.mp4"></video>
+  </div>
+
 </div>
-<p id="showbox" style="display: none">チャンス</p>
+
+
+
 
 <div class="bt"><button (click)="slot()">押せ</button></div>
 <!-- 
