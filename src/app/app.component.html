@@ -1,4 +1,5 @@
 <app-top-bar></app-top-bar>
+<app-top-slot [game]="game" [between]="between"></app-top-slot>
 
 <div class="main">
 
@@ -9,7 +10,8 @@
   </div>
 
   <div id="showbox" class="video" style="display: none">
-    <video autoplay src="../assets/countdown01-b5.mp4"></video>
+    <!-- <video autoplay src="../assets/countdown01-b5.mp4"></video> -->
+    <img src="../assets/OIP (1).jpg">
   </div>
 
 </div>
@@ -17,7 +19,7 @@
 
 
 
-<div class="bt"><button (click)="slot()">押せ</button></div>
+<div  class="bt"><button id="push" (click)="slot()">押せ</button></div>
 <!-- 
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

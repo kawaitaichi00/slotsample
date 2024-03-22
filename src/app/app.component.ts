@@ -12,12 +12,16 @@ export class AppComponent {
   leftnum: number = 1; //左リールの数字
   midnum: number = 3; //中リールの数字
   rightnum: number = 5; //右リールの数字
+  game:number=0;//総回転数
+  between:number=0;//大当たり間
 
   //ボタンが押されたときの処理
   slot() {
     let sto = this.pre1num;
     this.pre1num = this.pre2num;
     this.pre2num = Math.floor(Math.random() * 999) + 1;
+    this.game+=1;
+    this.between+=1;
 
     if (sto == undefined) {
       this.leftnum = Math.floor(Math.random() * 9) + 1;
@@ -43,7 +47,9 @@ export class AppComponent {
       this.rightnum == this.leftnum
     ) {
       alert('大当たり\n' + this.leftnum + this.midnum + this.rightnum);
+      this.between=0;
     }
+
   }
 
   //当たっているかいないかの処理
@@ -63,15 +69,19 @@ export class AppComponent {
   showBox() {
     let showbox = document.getElementById('showbox') as HTMLElement;
     showbox.style.display = 'block';
+    let invalidpush = document.getElementById('push') as HTMLButtonElement;
+    invalidpush.disabled = true;
     setTimeout(() => {
       this.closebox();
-    }, 5000);
+    }, 2000);
   }
 
   //showboxを非表示にする
   closebox() {
     let showbox = document.getElementById('showbox') as HTMLElement;
     showbox.style.display = 'none';
+    let invalidpush = document.getElementById('push') as HTMLButtonElement;
+    invalidpush.disabled = false;
   }
 }
 

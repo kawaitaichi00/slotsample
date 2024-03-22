@@ -9,6 +9,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { LeftComponent } from './left/left.component';
 import { MidComponent } from './mid/mid.component';
 import { RightComponent } from './right/right.component';
+import { TopSlotComponent } from './top-slot/top-slot.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { RightComponent } from './right/right.component';
     LeftComponent,
     MidComponent,
     RightComponent,
+    TopSlotComponent
   ],
   bootstrap: [AppComponent],
 })
