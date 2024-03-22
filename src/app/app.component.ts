@@ -33,21 +33,26 @@ export class AppComponent {
       this.rightnum = Math.floor(sto % 10);
     }
 
-    if (this.predict(this.pre2num)) {
+    if(this.pre2num<0){
       alert('チャンス');
     }
 
+    if (this.predict(this.pre2num)) {
+      alert('チャンス');
+      this.bonus=true;
+    }
+
     if (this.predict(this.pre1num ?? 135)) {
-      this.showBox();
+      this.showBox('showbox');
     }
 
     if (
       this.leftnum == this.midnum &&
-      this.midnum == this.rightnum &&
-      this.rightnum == this.leftnum
+      this.midnum == this.rightnum 
     ) {
       alert('大当たり\n' + this.leftnum + this.midnum + this.rightnum);
       this.between=0;
+      this.bonus=false;
     }
 
   }
@@ -58,27 +63,29 @@ export class AppComponent {
     let b = Math.floor((i / 10) % 10);
     let c = Math.floor(i % 10);
 
-    if (a == b && b == c && c == a) {
+    if (a == b && b == c) {
       return true;
     } else {
       return false;
     }
   }
 
-  //５秒後にcloseboxメソッドの呼び出し
-  showBox() {
-    let showbox = document.getElementById('showbox') as HTMLElement;
+  //2秒後にcloseboxメソッドの呼び出し
+  showBox(x:string) {
+    let showbox = document.getElementById(x) as HTMLElement;
     showbox.style.display = 'block';
     let invalidpush = document.getElementById('push') as HTMLButtonElement;
     invalidpush.disabled = true;
+    let audio = document.getElementById('myaudio')as HTMLAudioElement;
+    audio.play();
     setTimeout(() => {
-      this.closebox();
+      this.closebox(x);
     }, 2000);
   }
 
   //showboxを非表示にする
-  closebox() {
-    let showbox = document.getElementById('showbox') as HTMLElement;
+  closebox(x:string) {
+    let showbox = document.getElementById(x) as HTMLElement;
     showbox.style.display = 'none';
     let invalidpush = document.getElementById('push') as HTMLButtonElement;
     invalidpush.disabled = false;
