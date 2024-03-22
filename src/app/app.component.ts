@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,14 @@ export class AppComponent {
   rightnum: number = 5; //右リールの数字
   game:number=0;//総回転数
   between:number=0;//大当たり間
+
+  ngOnInit(){
+    if(!this.bonus){
+    setInterval(()=>{this.slot()},500);
+    }else{
+      setInterval(()=>{this.slot()},5000);
+    }
+  }
 
   //ボタンが押されたときの処理
   slot() {
@@ -34,25 +42,28 @@ export class AppComponent {
     }
 
     if(this.pre2num<0){
-      alert('チャンス');
+      // alert('チャンス');
     }
 
     if (this.predict(this.pre2num)) {
-      alert('チャンス');
+      // alert('チャンス');
       this.bonus=true;
     }
 
     if (this.predict(this.pre1num ?? 135)) {
       this.showBox('showbox');
+      let audio = document.getElementById('myaudio')as HTMLAudioElement;
+      audio.play();
     }
 
     if (
       this.leftnum == this.midnum &&
       this.midnum == this.rightnum 
     ) {
-      alert('大当たり\n' + this.leftnum + this.midnum + this.rightnum);
+      // alert('大当たり\n' + this.leftnum + this.midnum + this.rightnum);
       this.between=0;
       this.bonus=false;
+      this.showBox('showbox1');
     }
 
   }
@@ -76,8 +87,6 @@ export class AppComponent {
     showbox.style.display = 'block';
     let invalidpush = document.getElementById('push') as HTMLButtonElement;
     invalidpush.disabled = true;
-    let audio = document.getElementById('myaudio')as HTMLAudioElement;
-    audio.play();
     setTimeout(() => {
       this.closebox(x);
     }, 2000);
