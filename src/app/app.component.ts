@@ -18,22 +18,35 @@ export class AppComponent {
   interval = this.bonus ? 3000 : 100;
 
   ngOnInit(){
-    const interval1 = setInterval(()=>{
-      if(!this.bonus){
-        this.slot()
-      }else{
-        clearInterval(interval1)
-      }
-  },100);
-  const interval2 = setInterval(()=>{
 
-        if(this.bonus){
-          this.slot()
-        }else{
-          clearInterval(interval2)
-        }
-    },3000);
+  //   const interval1 = setInterval(()=>{
+  //     if(!this.bonus){
+  //       this.slot()
+  //     }else{
+  //       clearInterval(interval1)
+  //     }
+  // },100);
 
+  // const interval2 = setInterval(()=>{
+
+  //       if(this.bonus){
+  //         this.slot()
+  //       }else{
+  //         clearInterval(interval2)
+  //       }
+  //   },3000);
+
+  const interval1 = setInterval(() => {
+    if (!this.bonus) {
+        setInterval(() => {
+            this.slot();
+        }, 200);
+    } else {
+        setInterval(() => {
+            this.slot();
+        }, 10000);
+    }
+}, 5000);
     }
 
 //   loop(){
