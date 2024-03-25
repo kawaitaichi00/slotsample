@@ -14,14 +14,45 @@ export class AppComponent {
   rightnum: number = 5; //右リールの数字
   game:number=0;//総回転数
   between:number=0;//大当たり間
+  // bonus の値に応じて次回の実行間隔を設定
+  interval = this.bonus ? 3000 : 100;
 
   ngOnInit(){
-    if(this.bonus){
-    setInterval(()=>{this.slot()},100);
-    }//setIntervalの条件分岐
-    console.log(this.bonus);
-    
-  }
+    const interval1 = setInterval(()=>{
+      if(!this.bonus){
+        this.slot()
+      }else{
+        clearInterval(interval1)
+      }
+  },100);
+  const interval2 = setInterval(()=>{
+
+        if(this.bonus){
+          this.slot()
+        }else{
+          clearInterval(interval2)
+        }
+    },3000);
+
+    }
+
+//   loop(){
+//     const interval1 = setInterval(()=>{
+//       if(!this.bonus){
+//         this.slot()
+//       }else{
+//         clearInterval(interval1)
+//       }
+//   },100);
+//   const interval2 = setInterval(()=>{
+//     if(this.bonus){
+//       this.slot()
+//     }else{
+//       clearInterval(interval2)
+//     }
+// },3000);
+
+//   }
 
   //ボタンが押されたときの処理
   slot() {
@@ -63,9 +94,9 @@ export class AppComponent {
       // alert('大当たり\n' + this.leftnum + this.midnum + this.rightnum);
       this.between=0;
       // this.showBox('showbox1');
-      // this.bonus=false;
+      this.bonus=false;
     }
-    this.bonus=true;
+    //this.bonus=true;
 
     console.log(this.bonus);
 
