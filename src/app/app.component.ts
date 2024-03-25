@@ -6,7 +6,7 @@ import { Component,OnInit } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  bonus: boolean = false; //当たり判定
+  bonus: boolean =false ; //当たり判定
   pre2num: number | undefined; //2個前の
   pre1num: number | undefined; //１個前
   leftnum: number = 1; //左リールの数字
@@ -16,11 +16,11 @@ export class AppComponent {
   between:number=0;//大当たり間
 
   ngOnInit(){
-    if(!this.bonus){
-    setInterval(()=>{this.slot()},500);
-    }else{
-      setInterval(()=>{this.slot()},5000);
-    }
+    if(this.bonus){
+    setInterval(()=>{this.slot()},100);
+    }//setIntervalの条件分岐
+    console.log(this.bonus);
+    
   }
 
   //ボタンが押されたときの処理
@@ -46,12 +46,12 @@ export class AppComponent {
     }
 
     if (this.predict(this.pre2num)) {
-      // alert('チャンス');
-      this.bonus=true;
+      alert('チャンス');
+      this.bonus = true;
     }
 
     if (this.predict(this.pre1num ?? 135)) {
-      this.showBox('showbox');
+      // this.showBox('showbox');
       let audio = document.getElementById('myaudio')as HTMLAudioElement;
       audio.play();
     }
@@ -62,9 +62,12 @@ export class AppComponent {
     ) {
       // alert('大当たり\n' + this.leftnum + this.midnum + this.rightnum);
       this.between=0;
-      this.bonus=false;
-      this.showBox('showbox1');
+      // this.showBox('showbox1');
+      // this.bonus=false;
     }
+    this.bonus=true;
+
+    console.log(this.bonus);
 
   }
 
