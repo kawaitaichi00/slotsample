@@ -17,7 +17,7 @@ export class AppComponent {
   // bonus の値に応じて次回の実行間隔を設定
   interval = this.bonus ? 3000 : 100;
 
-  ngOnInit(){
+//   ngOnInit(){
 
   //   const interval1 = setInterval(()=>{
   //     if(!this.bonus){
@@ -36,36 +36,48 @@ export class AppComponent {
   //       }
   //   },3000);
 
-  const interval1 = setInterval(() => {
-    if (!this.bonus) {
-        setInterval(() => {
-            this.slot();
-        }, 200);
-    } else {
-        setInterval(() => {
-            this.slot();
-        }, 10000);
-    }
-}, 5000);
-    }
+// //   const interval1 = setInterval(() => {
+// //     if (!this.bonus) {
+// //         setTimeout(() => {
+// //             this.slot();
+// //         }, 100);
+// //     } 
+// //     if(this.bonus) {
+// //         setTimeout(() => {
+// //             this.slot();
+// //         }, 5000);
+// //     }
+// // }, 100);
 
-//   loop(){
-//     const interval1 = setInterval(()=>{
-//       if(!this.bonus){
-//         this.slot()
-//       }else{
-//         clearInterval(interval1)
-//       }
-//   },100);
-//   const interval2 = setInterval(()=>{
-//     if(this.bonus){
-//       this.slot()
-//     }else{
-//       clearInterval(interval2)
+//  setInterval(this.executeSlot, 100);
+
 //     }
-// },3000);
 
-//   }
+   
+
+
+
+
+   auto() {
+    const interval1 = setInterval(()=>{
+      if(!this.bonus){
+        this.slot()
+      }else{
+        clearInterval(interval1)
+      }
+  },100);
+
+  const interval2 = setInterval(()=>{
+
+        if(this.bonus){
+          this.slot()
+        }else{
+          clearInterval(interval2)
+        }
+    },3000);
+    }
+    
+   
 
   //ボタンが押されたときの処理
   slot() {
@@ -85,9 +97,15 @@ export class AppComponent {
       this.rightnum = Math.floor(sto % 10);
     }
 
-    if(this.pre2num<0){
-      // alert('チャンス');
-    }
+    // if(this.pre2num<500){
+    //   this.bonus = true;
+    // }else{
+    //   this.bonus = false;
+    // }
+
+    // if(this.pre2num<0){
+    //   // alert('チャンス');
+    // }
 
     if (this.predict(this.pre2num)) {
       alert('チャンス');
@@ -114,6 +132,11 @@ export class AppComponent {
     console.log(this.bonus);
 
   }
+
+
+
+
+
 
   //当たっているかいないかの処理
   predict(i: number): boolean {
