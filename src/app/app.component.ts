@@ -7,6 +7,7 @@ import { Component,OnInit } from '@angular/core';
 })
 export class AppComponent {
   bonus: boolean =false ; //当たり判定
+  pre3num: number | undefined; //2個前の
   pre2num: number | undefined; //2個前の
   pre1num: number | undefined; //１個前
   leftnum: number = 1; //左リールの数字
@@ -83,7 +84,8 @@ export class AppComponent {
   slot() {
     let sto = this.pre1num;
     this.pre1num = this.pre2num;
-    this.pre2num = Math.floor(Math.random() * 999) + 1;
+    this.pre2num = this.pre3num;
+    this.pre3num = Math.floor(Math.random() * 999) + 1;
     this.game+=1;
     this.between+=1;
 
@@ -107,13 +109,17 @@ export class AppComponent {
     //   // alert('チャンス');
     // }
 
-    if (this.predict(this.pre2num)) {
-      alert('チャンス');
+    if (this.predict(this.pre3num)) {
       this.bonus = true;
     }
 
+    if (this.predict(this.pre2num ?? 135)) {
+      let audio = document.getElementById('myaudio2')as HTMLAudioElement;
+      audio.play();
+    }
+
     if (this.predict(this.pre1num ?? 135)) {
-      // this.showBox('showbox');
+      this.showBox('showbox');
       let audio = document.getElementById('myaudio')as HTMLAudioElement;
       audio.play();
     }
@@ -124,7 +130,7 @@ export class AppComponent {
     ) {
       // alert('大当たり\n' + this.leftnum + this.midnum + this.rightnum);
       this.between=0;
-      // this.showBox('showbox1');
+      this.showBox('showbox1');
       this.bonus=false;
     }
     //this.bonus=true;
@@ -159,7 +165,7 @@ export class AppComponent {
     invalidpush.disabled = true;
     setTimeout(() => {
       this.closebox(x);
-    }, 2000);
+    }, 3000);
   }
 
   //showboxを非表示にする
