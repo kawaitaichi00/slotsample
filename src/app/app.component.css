@@ -24,9 +24,21 @@
   position: absolute;
   z-index:0;
   left: 50%;
-  top: 77%;
+  top: 80%;
   transform: translate(-50%, -50%);
   
+}
+
+.circle{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgb(162, 167, 168);/*背景色*/
+  position: absolute;
+  z-index:2;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
 }
 
 video{

@@ -17,6 +17,7 @@ export class AppComponent {
   between:number=0;//大当たり間
   // bonus の値に応じて次回の実行間隔を設定
   interval = this.bonus ? 3000 : 100;
+  maxnum: number|undefined;//再帰の最大を決定
 
 //   ngOnInit(){
 
@@ -76,6 +77,8 @@ export class AppComponent {
           clearInterval(interval2)
         }
     },3000);
+    console.log("終わり");
+
     }
     
    
@@ -88,6 +91,8 @@ export class AppComponent {
     this.pre3num = Math.floor(Math.random() * 999) + 1;
     this.game+=1;
     this.between+=1;
+
+    this.closebox('showbox1');
 
     if (sto == undefined) {
       this.leftnum = Math.floor(Math.random() * 9) + 1;
@@ -119,7 +124,7 @@ export class AppComponent {
     }
 
     if (this.predict(this.pre1num ?? 135)) {
-      this.showBox('showbox');
+      this.closelight('circle');
       let audio = document.getElementById('myaudio')as HTMLAudioElement;
       audio.play();
     }
@@ -130,8 +135,11 @@ export class AppComponent {
     ) {
       // alert('大当たり\n' + this.leftnum + this.midnum + this.rightnum);
       this.between=0;
+      let audio = document.getElementById('myaudio3')as HTMLAudioElement;
+      audio.play();
       this.showBox('showbox1');
       this.bonus=false;
+      this.showlight('circle');
     }
     //this.bonus=true;
 
@@ -164,7 +172,7 @@ export class AppComponent {
     let invalidpush = document.getElementById('push') as HTMLButtonElement;
     invalidpush.disabled = true;
     setTimeout(() => {
-      this.closebox(x);
+      this.closebox1(x);
     }, 3000);
   }
 
@@ -172,10 +180,36 @@ export class AppComponent {
   closebox(x:string) {
     let showbox = document.getElementById(x) as HTMLElement;
     showbox.style.display = 'none';
+    // let invalidpush = document.getElementById('push') as HTMLButtonElement;
+    // invalidpush.disabled = false;
+  }
+
+  //ボタンの活性化
+  closebox1(x:string) {
     let invalidpush = document.getElementById('push') as HTMLButtonElement;
     invalidpush.disabled = false;
   }
+
+  
+//ジャグランプをぺからせる
+  closelight(x:string) {
+    let showbox = document.getElementById(x) as HTMLElement;
+    showbox.style.display = 'none';
+    // let invalidpush = document.getElementById('push') as HTMLButtonElement;
+    // invalidpush.disabled = true;
+    // setTimeout(() => {
+    //   this.showlight(x);
+    // }, 3000);
+  }
+
+  //ジャグランプを隠す
+  showlight(x:string) {
+    let showbox = document.getElementById(x) as HTMLElement;
+    showbox.style.display = 'block';
+  }
 }
+
+
 
 /*
 Copyright Google LLC. All Rights Reserved.
